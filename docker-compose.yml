@@ -22,11 +22,11 @@ services:
       - zammad-data:/opt/zammad:ro
       - ./scripts/backup.sh:/usr/local/bin/backup.sh:ro
 
-  zammad-elasticsearch:
-    image: bitnami/elasticsearch:8.5.1
+  zammad-opensearch:
+    image: opensearchproject/opensearch:2.7.0
     restart: ${RESTART}
     volumes:
-      - elasticsearch-data:/bitnami/elasticsearch/data
+      - opensearch-data:/usr/share/opensearch/data
 
   zammad-init:
     command: ["zammad-init"]
@@ -114,7 +114,7 @@ services:
       - zammad-data:/opt/zammad
 
 volumes:
-  elasticsearch-data:
+  opensearch-data:
     driver: local
   postgresql-data:
     driver: local
