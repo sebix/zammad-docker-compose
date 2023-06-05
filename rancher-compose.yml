@@ -13,7 +13,7 @@ services:
     scale: 1
     start_on_create: true
 
-  zammad-elasticsearch:
+  zammad-opensearch:
     scale: 1
     start_on_create: true
 
