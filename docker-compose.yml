@@ -82,6 +82,8 @@ services:
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+     # Simulate ElasticSearch versions
+      - compatibility.override_main_response_version=true
     restart: ${RESTART}
     volumes:
       - opensearch-data:/usr/share/opensearch/data
