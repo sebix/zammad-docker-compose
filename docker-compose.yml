@@ -71,17 +71,16 @@ services:
     user: 0:0
 
   zammad-opensearch:
-    image: opensearchproject/opensearch:2.7.0
+    image: opensearchproject/opensearch:3
     environment:
       - cluster.name=opensearch-cluster # Name the cluster
       - node.name=zammad-opensearch # Name the node that will run in this container
       - discovery.seed_hosts=zammad-opensearch # Nodes to look for when discovering the cluster
       - cluster.initial_cluster_manager_nodes=zammad-opensearch # Nodes eligibile to serve as cluster manager
+      - discovery.type=single-node
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=admin # Set initial admin password
       # memory locking requested for opensearch process but memory is not locked
-      # - bootstrap.memory_lock=true # Disable JVM heap memory swapping
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
-      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
-      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
      # Simulate ElasticSearch versions
       - compatibility.override_main_response_version=true
     restart: ${RESTART}
